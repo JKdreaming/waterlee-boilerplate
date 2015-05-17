@@ -36,7 +36,6 @@ gulp.task('js', function() {
         .pipe(gulpif(env === 'production', uglify()))
         .pipe(concat('script.js'))
         .pipe(gulpif(env === 'development', sourcemaps.write()))
-        .pipe(browserSync.reload({stream:true}))
         .pipe(gulp.dest('js'));
 });
 
@@ -73,7 +72,7 @@ gulp.task('watch', function() {
         gulp.watch('src/scss/**/*.scss', ['sass']);
 
         // Watch .js files
-        gulp.watch('src/js/**/*.js', ['js']);
+        gulp.watch('src/js/**/*.js', ['js', browserSync.reload]);
 
         // Watch images
         //gulp.watch('src/images/**/*.*', ['image']);
